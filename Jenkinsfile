@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-
+    agent {
+        docker { image 'maven:3-alpine' }
+    }
     stages {
         // 获取代码
         stage('pull code') {
@@ -9,9 +10,7 @@ pipeline {
             }
         }
         stage('build project') {
-            agent {
-                docker { image 'maven:3-alpine' }
-            }
+
             steps {
                 sh 'mvn -v'
             }
